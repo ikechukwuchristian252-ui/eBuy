@@ -36,13 +36,13 @@ const products = [
   },
   {
     id: "3",
-    name: "Running Shoes",
+    name: "Smart Watch",
     price: "$59.99",
     image: require("../assets/images/watch.jpg"),
   },
   {
     id: "4",
-    name: "Sunglasses",
+    name: "iPhone 13 pro max",
     price: "$19.99",
     image: require("../assets/images/iphone.jpg"),
   },
@@ -53,28 +53,36 @@ const index = () => {
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 30 }}
+        contentContainerStyle={{ paddingBottom: 40 }}
       >
         {/* HEADER STARTS HERE */}
-        <View style={styles.container}>
+        <View style={[styles.container, { marginBottom: 20 }]}>
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>
               Hello, Christian {"\u{1F44B}"}
             </Text>
-            <Text style={{ fontSize: 16, fontWeight: "medium", color: "gray" }}>
+            <Text
+              style={{
+                fontSize: 15,
+                fontWeight: "medium",
+                color: "gray",
+                marginTop: 4,
+              }}
+            >
               What are you shopping today?
             </Text>
           </View>
-          <View style={styles.left}>
+          <View style={[styles.left, { gap: 12 }]}>
             <View>
-              <Lucide name="bell" color={"#000"} size={30} />
+              <Lucide name="bell" color={"#000"} size={26} />
+              <View style={styles.notificationDot} />
             </View>
             <View>
               <Image
                 source={require("../assets/images/img1.jpg")}
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 34,
+                  height: 34,
                   borderRadius: 100,
                   objectFit: "cover",
                 }}
@@ -85,23 +93,22 @@ const index = () => {
         {/* HEADER ENDS HERE */}
 
         {/* SEARCH INPUT STARTS HERE */}
-        <View>
+        <View style={{ marginBottom: 20 }}>
           <View
             style={{
               backgroundColor: "#fff",
               borderRadius: 12,
-              paddingVertical: 6,
+              paddingVertical: 5,
               borderWidth: 1,
               borderColor: "#ddd",
               flexDirection: "row",
-              paddingHorizontal: 10,
+              paddingHorizontal: 14,
               alignItems: "center",
               shadowColor: "#000",
               shadowOffset: { width: 0, height: 2 },
               shadowOpacity: 0.08,
               shadowRadius: 8,
-              marginTop: 5,
-              gap: 5,
+              gap: 8,
             }}
           >
             <Lucide name="search" color={"#9ca3af"} size={20} />
@@ -120,8 +127,9 @@ const index = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             flexDirection: "row",
-            gap: 6,
-            marginTop: 10,
+            gap: 10,
+            paddingRight: 20,
+            marginBottom: 24,
           }}
         >
           {categories.map((item) => (
@@ -151,19 +159,26 @@ const index = () => {
         <View
           style={{
             backgroundColor: "#1F65FB",
-            marginTop: 10,
             borderRadius: 15,
+            marginBottom: 28,
           }}
         >
-          <View style={styles.cta}>
+          <View style={[styles.cta, { gap: 10 }]}>
             <Text style={{ color: "#fff" }}>LIMITED TIME ONLY</Text>
-            <Text style={{ color: "#fff", fontSize: 24, fontWeight: "bold" }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 26,
+                fontWeight: "bold",
+                marginTop: 2,
+              }}
+            >
               Summer Sale
             </Text>
             <Text style={{ color: "#fff", fontSize: 20 }}>
               Up to <Text style={{ color: "#FFE205" }}>50%</Text> Off
             </Text>
-            <Pressable style={styles.shopButton}>
+            <Pressable style={[styles.shopButton, { marginTop: 6 }]}>
               <Text style={styles.shopButtonText}>Shop Now</Text>
               <Lucide name="arrow-right" color={"#2977F6"} size={16} />
             </Pressable>
@@ -172,22 +187,25 @@ const index = () => {
         {/* CTA ENDS HERE */}
 
         {/* PRODUCTS CARD STARTS HERE */}
-        <View style={{ marginTop: 20 }}>
+        <View>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 10,
+              marginBottom: 16,
             }}
           >
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-              Popular Products
+              Featured Products
             </Text>
-            <Pressable>
+            <Pressable
+              style={{ flexDirection: "row", alignItems: "center", gap: 2 }}
+            >
               <Text style={{ color: "#3b82f6", fontWeight: "600" }}>
-                See All
+                View All
               </Text>
+              <Lucide name="arrow-right" color={"#2977F6"} size={16} />
             </Pressable>
           </View>
 
@@ -195,7 +213,10 @@ const index = () => {
             {products.map((item) => (
               <View key={item.id} style={styles.card}>
                 <Image source={item.image} style={styles.cardImage} />
-                <Text style={styles.cardTitle} numberOfLines={1}>
+                <Text
+                  style={[styles.cardTitle, { marginTop: 4 }]}
+                  numberOfLines={1}
+                >
                   {item.name}
                 </Text>
                 <View
@@ -203,12 +224,12 @@ const index = () => {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginTop: 6,
+                    marginTop: 10,
                   }}
                 >
                   <Text style={styles.cardPrice}>{item.price}</Text>
                   <Pressable style={styles.addButton}>
-                    <Lucide name="plus" color={"#fff"} size={16} />
+                    <Lucide name="plus" color={"#3b82f6"} size={16} />
                   </Pressable>
                 </View>
               </View>
@@ -239,6 +260,18 @@ const styles = StyleSheet.create({
   left: {
     flexDirection: "row",
     gap: 8,
+    alignItems: "center",
+  },
+  notificationDot: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 10,
+    height: 10,
+    borderRadius: 100,
+    backgroundColor: "#3b82f6",
+    borderWidth: 1.5,
+    borderColor: "#f8fafc",
   },
   tab: {
     flexDirection: "row",
@@ -286,9 +319,9 @@ const styles = StyleSheet.create({
   card: {
     width: "48%",
     backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 10,
-    marginBottom: 12,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 16,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
@@ -297,10 +330,10 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     width: "100%",
-    height: 100,
-    borderRadius: 8,
-    marginBottom: 8,
-    objectFit: "cover",
+    height: 110,
+    borderRadius: 10,
+    marginBottom: 10,
+    objectFit: "contain",
   },
   cardTitle: {
     fontSize: 14,
@@ -313,7 +346,7 @@ const styles = StyleSheet.create({
     color: "#3b82f6",
   },
   addButton: {
-    backgroundColor: "#3b82f6",
+    backgroundColor: "#E7EFFE",
     borderRadius: 100,
     width: 28,
     height: 28,
